@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS users CASCADE;
+
+DROP TABLE IF EXISTS message;
+
+DROP TABLE IF EXISTS conversation_users;
+
+DROP TABLE IF EXISTS conversation;
