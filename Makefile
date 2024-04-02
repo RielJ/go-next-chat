@@ -103,4 +103,8 @@ watch:
 	    fi; \
 	fi
 
-.PHONY: all build run test clean
+# mock generate
+mock:
+	mockgen --destination internal/mock/store.go github.com/rielj/go-next-chat/internal/db/sqlc Store
+
+.PHONY: all build run test clean watch watch-client migrateup migrateup1 migratedown migratedown1 new_migration sqlc mock docker-run docker-down ddocker-run
