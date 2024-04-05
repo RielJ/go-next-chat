@@ -16,6 +16,7 @@ type Querier interface {
 	CreateMessage(ctx context.Context, arg CreateMessageParams) (Message, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
+	CreateVerifyEmail(ctx context.Context, arg CreateVerifyEmailParams) (VerifyEmail, error)
 	DeleteConversationUser(ctx context.Context, arg DeleteConversationUserParams) (ConversationUser, error)
 	GetConversation(ctx context.Context, id int64) (Conversation, error)
 	GetConversationMessages(ctx context.Context, arg GetConversationMessagesParams) ([]Message, error)
@@ -28,6 +29,7 @@ type Querier interface {
 	UpdateConversation(ctx context.Context, arg UpdateConversationParams) (Conversation, error)
 	UpdateMessage(ctx context.Context, arg UpdateMessageParams) (Message, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
+	UpdateVerifyEmail(ctx context.Context, arg UpdateVerifyEmailParams) (VerifyEmail, error)
 }
 
 var _ Querier = (*Queries)(nil)

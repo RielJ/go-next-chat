@@ -2,8 +2,6 @@ package token
 
 import (
 	"time"
-
-	"github.com/labstack/echo/v4"
 )
 
 // Maker is an interface for managing tokens
@@ -14,5 +12,5 @@ type Maker interface {
 	// VerifyToken checks if the token is valid or not
 	VerifyToken(token string) (*Payload, error)
 
-	Middleware() echo.MiddlewareFunc
+	// Middleware() echo.MiddlewareFunc
 }

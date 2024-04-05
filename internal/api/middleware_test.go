@@ -1,12 +1,12 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
 
-	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/require"
 
@@ -25,11 +25,12 @@ func addAuthorization(
 	require.NoError(t, err)
 	require.NotEmpty(t, payload)
 
-	req.Header.Set("x-auth-token", token)
+	authorizationHeader := fmt.Sprintf("%s %s", authorizationTypeBearer, token)
+	req.Header.Set(authorizationHeaderKey, authorizationHeader)
 
 	cookie := new(http.Cookie)
-	cookie.Name = "x-auth-token"
-	cookie.Value = token
+	cookie.Name = authorizationHeaderKey
+	cookie.Value = authorizationHeader
 	cookie.Expires = time.Now().Add(duration)
 	cookie.Path = "/"
 	cookie.HttpOnly = true
@@ -37,7 +38,7 @@ func addAuthorization(
 	req.AddCookie(cookie)
 }
 
-func TestAuthMiddleware(t *testing.T) {
+func TestJWTAuthMiddleware(t *testing.T) {
 	email := util.RandomEmail()
 
 	testCases := []struct {
@@ -90,16 +91,13 @@ func TestAuthMiddleware(t *testing.T) {
 			e.router.GET(
 				authPath,
 				func(c echo.Context) error {
-					user := c.Get("user").(*jwt.Token)
-
-					mapClaims := user.Claims.(jwt.MapClaims)
-					mapClaimsEmail, ok := mapClaims["email"]
-					require.True(t, ok)
-					require.Equal(t, email, mapClaimsEmail)
+					user := c.Get(authorizationPayloadKey).(*token.Payload)
+					require.Equal(t, email, user.Email)
 
 					return c.String(http.StatusOK, "Authenticated")
 				},
-				e.tokenMaker.Middleware(),
+				// e.tokenMaker.Middleware(),
+				authMiddleware(e.tokenMaker),
 			)
 
 			rec := httptest.NewRecorder()

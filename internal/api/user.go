@@ -154,15 +154,14 @@ func (s *Server) loginUser(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, errorResponse(err))
 	}
 
-	refreshPayloadUUID := uuid.MustParse(refreshPayload.ID)
 	session, err := s.store.CreateSession(c.Request().Context(), db.CreateSessionParams{
-		ID:           refreshPayloadUUID,
+		ID:           refreshPayload.ID,
 		Email:        user.Email,
 		RefreshToken: refreshToken,
 		UserAgent:    c.Request().UserAgent(),
 		ClientIp:     c.RealIP(),
 		IsBlocked:    false,
-		ExpiresAt:    refreshPayload.ExpiresAt.Time,
+		ExpiresAt:    refreshPayload.ExpiredAt,
 	})
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, errorResponse(err))
@@ -171,9 +170,9 @@ func (s *Server) loginUser(c echo.Context) error {
 	response := loginUserResponse{
 		SessionID:             session.ID,
 		AccessToken:           accessToken,
-		AccessTokenExpiresAt:  accessPayload.ExpiresAt.Unix(),
+		AccessTokenExpiresAt:  accessPayload.ExpiredAt.Unix(),
 		RefreshToken:          refreshToken,
-		RefreshTokenExpiresAt: refreshPayload.ExpiresAt.Unix(),
+		RefreshTokenExpiresAt: refreshPayload.ExpiredAt.Unix(),
 		User:                  newUserResponse(user),
 	}
 
