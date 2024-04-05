@@ -31,3 +31,4 @@ jobs:
 
       - name: Test
         run: make test
+        depends-on: Create env File
