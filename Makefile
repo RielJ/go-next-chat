@@ -1,5 +1,8 @@
 # Simple Makefile for a Go project
-include app.env
+ifeq (,$(wildcard app.env))
+	include app.env
+endif
+
 
 # Build the application
 all: build
