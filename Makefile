@@ -1,10 +1,6 @@
 # Simple Makefile for a Go project
 include app.env
 
-@if [ -f app.env ]; then \
-		echo "app.env file exists"; \
-		$(eval export $(shell sed -ne 's/ *#.*$$//; /./ s/=.*$$// p' app.env))
-
 # Build the application
 all: build
 
