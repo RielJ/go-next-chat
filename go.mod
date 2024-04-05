@@ -3,13 +3,13 @@ module github.com/rielj/go-next-chat
 go 1.22.1
 
 require (
+	github.com/aead/chacha20poly1305 v0.0.0-20170617001512-233f39982aeb
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/golang-jwt/jwt/v4 v4.4.2
 	github.com/golang-migrate/migrate/v4 v4.17.0
 	github.com/google/uuid v1.4.0
 	github.com/jackc/pgx/v5 v5.5.5
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
-	github.com/labstack/echo-jwt v0.0.0-20221127215225-c84d41a71003
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/o1egl/paseto v1.0.0
 	github.com/rs/zerolog v1.32.0
@@ -21,14 +21,12 @@ require (
 
 require (
 	github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da // indirect
-	github.com/aead/chacha20poly1305 v0.0.0-20170617001512-233f39982aeb // indirect
 	github.com/aead/poly1305 v0.0.0-20180717145839-3fee0db0b635 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -60,7 +58,6 @@ require (
 	golang.org/x/sync v0.5.0 // indirect
 	golang.org/x/sys v0.17.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
-	golang.org/x/time v0.5.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

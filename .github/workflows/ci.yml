@@ -6,7 +6,18 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: go-chatters-next
+        ports:
+          - 5432:5432
     steps:
+      - name: Create env File
+        run: echo "DB_SOURCE=postgresql://rielj:${{secrets.POSTGRES_PASSWORD}}@localhost:5432/go-chatters-next?sslmode=disable" > app.env
       - name: Set up Go 1.22
         uses: actions/setup-go@v2
         with:

@@ -18,22 +18,22 @@ run:
 # migrate up
 migrateup:
 	@echo "Migrating up..."
-	migrate -path internal/db/migration -database "postgres://$$DB_USERNAME:$$DB_PASSWORD@$$DB_HOST:$$DB_PORT/$$DB_DATABASE?sslmode=disable" --verbose up
+	migrate -path internal/db/migration -database "$$DB_SOURCE" --verbose up
 
 # migrate up 1
 migrateup1:
 	@echo "Migrating up..."
-	migrate -path internal/db/migration -database "postgres://$$DB_USERNAME:$$DB_PASSWORD@$$DB_HOST:$$DB_PORT/$$DB_DATABASE?sslmode=disable" --verbose up 1
+	migrate -path internal/db/migration -database "$$DB_SOURCE" --verbose up 1
 
 # migrate down
 migratedown:
 	@echo "Migrating up..."
-	migrate -path internal/db/migration -database "postgres://$$DB_USERNAME:$$DB_PASSWORD@$$DB_HOST:$$DB_PORT/$$DB_DATABASE?sslmode=disable" --verbose down
+	migrate -path internal/db/migration -database "$$DB_SOURCE" --verbose down
 
 # migrate down
 migratedown1:
 	@echo "Migrating up..."
-	migrate -path internal/db/migration -database "postgres://$$DB_USERNAME:$$DB_PASSWORD@$$DB_HOST:$$DB_PORT/$$DB_DATABASE?sslmode=disable" --verbose down 1
+	migrate -path internal/db/migration -database "$$DB_SOURCE" --verbose down 1
 
 # new migration
 new_migration:
