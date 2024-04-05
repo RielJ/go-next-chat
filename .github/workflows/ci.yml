@@ -17,7 +17,9 @@ jobs:
           - 5432:5432
     steps:
       - name: Create env File
-        run: echo "DB_SOURCE=postgresql://rielj:${{secrets.POSTGRES_PASSWORD}}@localhost:5432/go-chatters-next?sslmode=disable" > app.env
+        run: |
+          touch app.env
+          echo "DB_SOURCE=postgresql://rielj:${{secrets.POSTGRES_PASSWORD}}@localhost:5432/go-chatters-next?sslmode=disable" >> app.env
       - name: Set up Go 1.22
         uses: actions/setup-go@v2
         with:
