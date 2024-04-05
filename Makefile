@@ -1,5 +1,5 @@
 # Simple Makefile for a Go project
-ifeq (,$(wildcard app.env))
+ifneq ("$(wildcard app.env)", "")
 	include app.env
 endif
 

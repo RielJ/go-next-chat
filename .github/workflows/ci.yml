@@ -28,10 +28,9 @@ jobs:
       - name: Install golang-migrate
         run: |
           curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.linux-amd64.tar.gz | tar xvz
-          sudo mv migrate.linux-amd64 /usr/local/bin/migrate
+          sudo mv migrate /usr/local/bin/migrate
           which migrate
 
       - name: Test
         run: |
-          cat app.env
           DB_SOURCE=postgresql://rielj:${{secrets.POSTGRES_PASSWORD}}@localhost:5432/go-chatters-next?sslmode=disable make test
